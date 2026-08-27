@@ -1,0 +1,270 @@
+/* Forex Kurdistan Global Stylesheet */
+:root {
+    --bg-main: #0b0e14;
+    --bg-card: #121824;
+    --bg-panel: #182030;
+    --accent-green: #0ecb81;
+    --accent-red: #f6465d;
+    --accent-gold: #f3ba2f;
+    --text-main: #ffffff;
+    --text-muted: #848e9c;
+    --border-color: #222d42;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: var(--bg-card);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #161d2c;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo-area {
+    display: flex;
+    flex-direction: column;
+}
+.logo-title {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--text-main);
+}
+.logo-title span {
+    color: var(--accent-gold);
+}
+.logo-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-main);
+    font-size: 12px;
+    font-weight: bold;
+}
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Market Watch Ticker */
+.market-ticker {
+    display: flex;
+    gap: 10px;
+    padding: 10px 15px;
+    overflow-x: auto;
+    background-color: #0e131b;
+    border-bottom: 1px solid var(--border-color);
+}
+.ticker-item {
+    background-color: #1a2233;
+    padding: 8px 12px;
+    border-radius: 8px;
+    min-width: 110px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+}
+.ticker-pair {
+    font-size: 12px;
+    font-weight: bold;
+    color: #c9d1d9;
+}
+.ticker-price {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 2px 0;
+}
+.ticker-change {
+    font-size: 11px;
+}
+.text-green { color: var(--accent-green); }
+.text-red { color: var(--accent-red); }
+
+/* Chart Section */
+.chart-section {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.chart-pair-info {
+    font-size: 14px;
+    font-weight: bold;
+}
+.chart-box {
+    background-color: var(--bg-panel);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+.chart-svg {
+    width: 100%;
+    height: 150px;
+}
+.chart-indicators {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color);
+    padding-top: 8px;
+}
+
+/* Portfolio Section */
+.portfolio-section {
+    padding: 0 15px 15px 15px;
+}
+.section-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+.portfolio-table {
+    background-color: var(--bg-panel);
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    font-size: 12px;
+}
+.table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.table-row:last-child {
+    border-bottom: none;
+}
+
+/* Trading Action Buttons */
+.action-panel {
+    padding: 15px;
+    background-color: #161d2c;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 12px;
+}
+.btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+.btn-buy {
+    background-color: var(--accent-green);
+    color: var(--bg-main);
+}
+.btn-sell {
+    background-color: var(--accent-red);
+    color: #ffffff;
+}
+.btn-sub {
+    font-size: 11px;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+/* Risk warning */
+.risk-warning {
+    font-size: 9px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 8px 15px;
+    background-color: #0a0e14;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #0e131b;
+    padding: 10px 0;
+    border-top: 1px solid var(--border-color);
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 10px;
+    gap: 4px;
+}
+.nav-item.active {
+    color: var(--accent-gold);
+}
+.nav-item svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
