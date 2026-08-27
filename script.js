@@ -2,7 +2,13 @@
 
    DINAR APP
 
-   Frontend Demo / Local Storage Version
+   Complete Frontend
+
+   ========================================================= */
+
+/* =========================================================
+
+   DEFAULT DATA
 
    ========================================================= */
 
@@ -54,6 +60,12 @@ const DEFAULT_STATE = {
 
 };
 
+/* =========================================================
+
+   STATE
+
+   ========================================================= */
+
 let state = loadState();
 
 let selectedPayment = "Visa";
@@ -62,7 +74,7 @@ let balanceHidden = false;
 
 /* =========================================================
 
-   STORAGE
+   LOAD STATE
 
    ========================================================= */
 
@@ -70,31 +82,65 @@ function loadState() {
 
   try {
 
-    const saved = localStorage.getItem("DINAR_APP_STATE");
+    const saved =
+
+      localStorage.getItem(
+
+        "DINAR_APP_STATE"
+
+      );
 
     if (!saved) {
 
-      return structuredClone(DEFAULT_STATE);
+      return JSON.parse(
+
+        JSON.stringify(DEFAULT_STATE)
+
+      );
 
     }
 
+    const parsed =
+
+      JSON.parse(saved);
+
     return {
 
-      ...structuredClone(DEFAULT_STATE),
+      ...JSON.parse(
 
-      ...JSON.parse(saved)
+        JSON.stringify(DEFAULT_STATE)
+
+      ),
+
+      ...parsed
 
     };
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
 
-    return structuredClone(DEFAULT_STATE);
+      "State loading error:",
+
+      error
+
+    );
+
+    return JSON.parse(
+
+      JSON.stringify(DEFAULT_STATE)
+
+    );
 
   }
 
 }
+
+/* =========================================================
+
+   SAVE STATE
+
+   ========================================================= */
 
 function saveState() {
 
@@ -110,83 +156,161 @@ function saveState() {
 
 /* =========================================================
 
-   HELPERS
+   NUMBER FORMAT
 
    ========================================================= */
 
-function formatNumber(number) {
+function formatNumber(value) {
 
-  return Number(number || 0).toLocaleString("en-US");
+  return Number(value || 0)
 
-}
-
-function formatUsd(number) {
-
-  return "$" + Number(number || 0).toFixed(2);
-
-}
-
-function dinarToUsd(dinar) {
-
-  return (Number(dinar) / state.price) * 10;
-
-}
-
-function showToast(message) {
-
-  const toast = document.getElementById("toast");
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(window.toastTimer);
-
-  window.toastTimer = setTimeout(() => {
-
-    toast.classList.remove("show");
-
-  }, 2600);
+    .toLocaleString("en-US");
 
 }
 
 /* =========================================================
 
-   PAGE NAVIGATION
+   USD FORMAT
+
+   ========================================================= */
+
+function formatUsd(value) {
+
+  return "$" +
+
+    Number(value || 0)
+
+      .toFixed(2);
+
+}
+
+/* =========================================================
+
+   DINAR TO USD
+
+   10,000 DINAR = $10
+
+   ========================================================= */
+
+function dinarToUsd(dinar) {
+
+  return (
+
+    Number(dinar || 0) /
+
+    Number(state.price || 10000)
+
+  ) * 10;
+
+}
+
+/* =========================================================
+
+   TOAST
+
+   ========================================================= */
+
+function showToast(message) {
+
+  const toast =
+
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+
+    window.dinarToastTimer
+
+  );
+
+  window.dinarToastTimer =
+
+    setTimeout(() => {
+
+      toast.classList.remove(
+
+        "show"
+
+      );
+
+    }, 2600);
+
+}
+
+/* =========================================================
+
+   PAGE SYSTEM
 
    ========================================================= */
 
 function openPage(pageId) {
 
-  document.querySelectorAll(".page").forEach(page => {
+  document
 
-    page.classList.remove("active");
+    .querySelectorAll(".page")
 
-  });
+    .forEach(page => {
 
-  const target = document.getElementById(pageId);
+      page.classList.remove(
 
-  if (target) {
+        "active"
 
-    target.classList.add("active");
+      );
+
+    });
+
+  const page =
+
+    document.getElementById(
+
+      pageId
+
+    );
+
+  if (!page) {
+
+    return;
 
   }
 
-  document.querySelectorAll(".nav-item").forEach(item => {
+  page.classList.add(
 
-    item.classList.remove("active");
-
-  });
-
-  const navItem = document.querySelector(
-
-    `.nav-item[data-page="${pageId}"]`
+    "active"
 
   );
 
-  if (navItem) {
+  document
 
-    navItem.classList.add("active");
+    .querySelectorAll(".nav-item")
+
+    .forEach(item => {
+
+      item.classList.remove(
+
+        "active"
+
+      );
+
+    });
+
+  const nav =
+
+    document.querySelector(
+
+      `.nav-item[data-page="${pageId}"]`
+
+    );
+
+  if (nav) {
+
+    nav.classList.add(
+
+      "active"
+
+    );
 
   }
 
@@ -204,7 +328,11 @@ function openPage(pageId) {
 
       drawChart(
 
-        document.getElementById("homeChart"),
+        document.getElementById(
+
+          "homeChart"
+
+        ),
 
         155
 
@@ -216,7 +344,11 @@ function openPage(pageId) {
 
       drawChart(
 
-        document.getElementById("marketChart"),
+        document.getElementById(
+
+          "marketChart"
+
+        ),
 
         245
 
@@ -224,31 +356,43 @@ function openPage(pageId) {
 
     }
 
-  }, 80);
+  }, 100);
 
 }
 
 /* =========================================================
 
-   NAVIGATION EVENTS
+   NAV ITEMS
 
    ========================================================= */
 
-document.querySelectorAll(".nav-item").forEach(item => {
+document
 
-  item.addEventListener("click", () => {
+  .querySelectorAll(".nav-item")
 
-    const page = item.dataset.page;
+  .forEach(item => {
 
-    if (page) {
+    item.addEventListener(
 
-      openPage(page);
+      "click",
 
-    }
+      () => {
+
+        const page =
+
+          item.dataset.page;
+
+        if (page) {
+
+          openPage(page);
+
+        }
+
+      }
+
+    );
 
   });
-
-});
 
 /* =========================================================
 
@@ -258,25 +402,41 @@ document.querySelectorAll(".nav-item").forEach(item => {
 
 function updateUI() {
 
-  const balance = state.balance;
+  const balance =
 
-  const usd = dinarToUsd(balance);
+    Number(state.balance || 0);
 
-  /* HOME */
+  const usd =
+
+    dinarToUsd(balance);
+
+  /* HOME BALANCE */
 
   const homeBalance =
 
-    document.getElementById("homeBalance");
+    document.getElementById(
+
+      "homeBalance"
+
+    );
 
   const homeUsd =
 
-    document.getElementById("homeUsd");
+    document.getElementById(
+
+      "homeUsd"
+
+    );
 
   if (balanceHidden) {
 
-    homeBalance.textContent = "••••••";
+    homeBalance.textContent =
 
-    homeUsd.textContent = "••••";
+      "••••••";
+
+    homeUsd.textContent =
+
+      "••••";
 
   } else {
 
@@ -290,19 +450,37 @@ function updateUI() {
 
   }
 
-  document.getElementById("walletBalance").textContent =
+  /* WALLET */
+
+  document.getElementById(
+
+    "walletBalance"
+
+  ).textContent =
 
     formatNumber(balance);
 
-  document.getElementById("availableBalance").textContent =
+  document.getElementById(
+
+    "availableBalance"
+
+  ).textContent =
 
     formatNumber(balance);
 
-  document.getElementById("walletUsd").textContent =
+  document.getElementById(
+
+    "walletUsd"
+
+  ).textContent =
 
     formatUsd(usd);
 
-  document.getElementById("totalValue").textContent =
+  document.getElementById(
+
+    "totalValue"
+
+  ).textContent =
 
     formatUsd(usd);
 
@@ -310,29 +488,55 @@ function updateUI() {
 
   const priceUsd =
 
-    state.price / 1000;
+    Number(state.price) / 1000;
 
-  document.getElementById("miniPrice").textContent =
+  document.getElementById(
+
+    "miniPrice"
+
+  ).textContent =
 
     formatUsd(priceUsd);
 
-  document.getElementById("buyPrice").textContent =
+  document.getElementById(
+
+    "buyPrice"
+
+  ).textContent =
 
     formatUsd(priceUsd);
 
-  document.getElementById("marketPrice").textContent =
+  document.getElementById(
+
+    "marketPrice"
+
+  ).textContent =
 
     formatNumber(state.price);
 
-  document.getElementById("chartPrice").textContent =
+  document.getElementById(
 
-    formatNumber(state.price) + " دینار";
+    "chartPrice"
 
-  document.getElementById("adminPrice").textContent =
+  ).textContent =
+
+    formatNumber(state.price) +
+
+    " دینار";
+
+  document.getElementById(
+
+    "adminPrice"
+
+  ).textContent =
 
     formatNumber(state.price);
 
-  document.getElementById("adminPriceInput").value =
+  document.getElementById(
+
+    "adminPriceInput"
+
+  ).value =
 
     state.price;
 
@@ -344,27 +548,49 @@ function updateUI() {
 
 /* =========================================================
 
-   BUY CALCULATOR
+   BUY AMOUNT
 
    ========================================================= */
 
 const buyAmount =
 
-  document.getElementById("buyAmount");
+  document.getElementById(
+
+    "buyAmount"
+
+  );
 
 const amountSlider =
 
-  document.getElementById("amountSlider");
+  document.getElementById(
+
+    "amountSlider"
+
+  );
+
+/* =========================================================
+
+   BUY CALCULATOR
+
+   ========================================================= */
 
 function updateBuySummary() {
 
-  let amount = Number(buyAmount.value);
+  let amount =
+
+    Number(
+
+      buyAmount.value
+
+    );
 
   if (!amount || amount < 1000) {
 
     amount = 1000;
 
-    buyAmount.value = amount;
+    buyAmount.value =
+
+      amount;
 
   }
 
@@ -372,27 +598,47 @@ function updateBuySummary() {
 
     dinarToUsd(amount);
 
-  document.getElementById("summaryDinar").textContent =
+  document.getElementById(
+
+    "summaryDinar"
+
+  ).textContent =
 
     formatNumber(amount);
 
-  document.getElementById("summaryUsd").textContent =
+  document.getElementById(
+
+    "summaryUsd"
+
+  ).textContent =
 
     formatUsd(usd);
 
-  document.getElementById("buyButtonAmount").textContent =
+  document.getElementById(
+
+    "buyButtonAmount"
+
+  ).textContent =
 
     formatNumber(amount);
 
-  amountSlider.value = Math.min(
+  amountSlider.value =
 
-    amount,
+    Math.min(
 
-    Number(amountSlider.max)
+      amount,
 
-  );
+      Number(amountSlider.max)
+
+    );
 
 }
+
+/* =========================================================
+
+   BUY INPUT
+
+   ========================================================= */
 
 buyAmount.addEventListener(
 
@@ -401,6 +647,12 @@ buyAmount.addEventListener(
   updateBuySummary
 
 );
+
+/* =========================================================
+
+   SLIDER
+
+   ========================================================= */
 
 amountSlider.addEventListener(
 
@@ -420,31 +672,57 @@ amountSlider.addEventListener(
 
 /* =========================================================
 
-   PAYMENT METHOD
+   PAYMENT
 
    ========================================================= */
 
-document.querySelectorAll(".payment").forEach(button => {
+document
 
-  button.addEventListener("click", () => {
+  .querySelectorAll(".payment")
 
-    document.querySelectorAll(".payment")
+  .forEach(button => {
 
-      .forEach(item => {
+    button.addEventListener(
 
-        item.classList.remove("active");
+      "click",
 
-      });
+      () => {
 
-    button.classList.add("active");
+        document
 
-    selectedPayment =
+          .querySelectorAll(".payment")
 
-      button.dataset.payment;
+          .forEach(item => {
+
+            item.classList.remove(
+
+              "active"
+
+            );
+
+          });
+
+        button.classList.add(
+
+          "active"
+
+        );
+
+        selectedPayment =
+
+          button.dataset.payment;
+
+        showToast(
+
+          `شێوازی پارەدان: ${selectedPayment}`
+
+        );
+
+      }
+
+    );
 
   });
-
-});
 
 /* =========================================================
 
@@ -452,83 +730,123 @@ document.querySelectorAll(".payment").forEach(button => {
 
    ========================================================= */
 
-document.getElementById("buyBtn")
+document
 
-  .addEventListener("click", () => {
+  .getElementById("buyBtn")
 
-    const amount =
+  .addEventListener(
 
-      Number(buyAmount.value);
+    "click",
 
-    if (!amount || amount < 1000) {
+    () => {
+
+      const amount =
+
+        Number(
+
+          buyAmount.value
+
+        );
+
+      if (
+
+        !amount ||
+
+        amount < 1000
+
+      ) {
+
+        showToast(
+
+          "تکایە بڕێکی دروست هەڵبژێرە."
+
+        );
+
+        return;
+
+      }
+
+      const usd =
+
+        dinarToUsd(amount);
+
+      /*
+
+        IMPORTANT:
+
+        This is a FRONTEND DEMO.
+
+        Real payment processing must
+
+        happen on a secure backend.
+
+      */
+
+      state.balance +=
+
+        amount;
+
+      state.transactions.unshift({
+
+        type: "buy",
+
+        amount: amount,
+
+        usd: usd,
+
+        payment: selectedPayment,
+
+        date: getDateTime()
+
+      });
+
+      saveState();
+
+      updateUI();
 
       showToast(
 
-        "تکایە بڕێکی دروست هەڵبژێرە."
+        `${formatNumber(amount)} دینار زیاد کرا.`
 
       );
 
-      return;
+      openPage(
+
+        "walletPage"
+
+      );
 
     }
 
-    const usd =
-
-      dinarToUsd(amount);
-
-    /*
-
-      Frontend demo:
-
-      Here the real payment provider would be connected.
-
-    */
-
-    state.balance += amount;
-
-    state.transactions.unshift({
-
-      type: "buy",
-
-      amount: amount,
-
-      usd: usd,
-
-      date: getDateTime()
-
-    });
-
-    saveState();
-
-    updateUI();
-
-    showToast(
-
-      `${formatNumber(amount)} دینار زیاد کرا.`
-
-    );
-
-    openPage("walletPage");
-
-  });
+  );
 
 /* =========================================================
 
-   TRANSACTIONS
+   DATE
 
    ========================================================= */
 
 function getDateTime() {
 
-  const now = new Date();
+  const now =
+
+    new Date();
 
   const day =
 
-    String(now.getDate()).padStart(2, "0");
+    String(
+
+      now.getDate()
+
+    ).padStart(2, "0");
 
   const month =
 
-    String(now.getMonth() + 1).padStart(2, "0");
+    String(
+
+      now.getMonth() + 1
+
+    ).padStart(2, "0");
 
   const year =
 
@@ -536,15 +854,33 @@ function getDateTime() {
 
   const hours =
 
-    String(now.getHours()).padStart(2, "0");
+    String(
+
+      now.getHours()
+
+    ).padStart(2, "0");
 
   const minutes =
 
-    String(now.getMinutes()).padStart(2, "0");
+    String(
 
-  return `${day}/${month}/${year} - ${hours}:${minutes}`;
+      now.getMinutes()
+
+    ).padStart(2, "0");
+
+  return (
+
+    `${day}/${month}/${year} - ${hours}:${minutes}`
+
+  );
 
 }
+
+/* =========================================================
+
+   TRANSACTION HTML
+
+   ========================================================= */
 
 function transactionHTML(transaction) {
 
@@ -576,9 +912,17 @@ function transactionHTML(transaction) {
 
       <div class="transaction-info">
 
-        <strong>${title}</strong>
+        <strong>
 
-        <small>${transaction.date}</small>
+          ${title}
+
+        </strong>
+
+        <small>
+
+          ${transaction.date}
+
+        </small>
 
       </div>
 
@@ -604,15 +948,29 @@ function transactionHTML(transaction) {
 
 }
 
+/* =========================================================
+
+   RENDER TRANSACTIONS
+
+   ========================================================= */
+
 function renderTransactions() {
 
   const home =
 
-    document.getElementById("homeTransactions");
+    document.getElementById(
+
+      "homeTransactions"
+
+    );
 
   const all =
 
-    document.getElementById("allTransactions");
+    document.getElementById(
+
+      "allTransactions"
+
+    );
 
   const transactions =
 
@@ -644,7 +1002,13 @@ function renderTransactions() {
 
    ========================================================= */
 
-function drawChart(canvas, height) {
+function drawChart(
+
+  canvas,
+
+  height
+
+) {
 
   if (!canvas) {
 
@@ -658,7 +1022,13 @@ function drawChart(canvas, height) {
 
   const width =
 
-    Math.max(rect.width, 280);
+    Math.max(
+
+      rect.width,
+
+      280
+
+    );
 
   const ratio =
 
@@ -678,15 +1048,47 @@ function drawChart(canvas, height) {
 
   const ctx =
 
-    canvas.getContext("2d");
+    canvas.getContext(
 
-  ctx.scale(ratio, ratio);
+      "2d"
 
-  const w = width;
+    );
 
-  const h = height;
+  ctx.setTransform(
 
-  ctx.clearRect(0, 0, w, h);
+    ratio,
+
+    0,
+
+    0,
+
+    ratio,
+
+    0,
+
+    0
+
+  );
+
+  const w =
+
+    width;
+
+  const h =
+
+    height;
+
+  ctx.clearRect(
+
+    0,
+
+    0,
+
+    w,
+
+    h
+
+  );
 
   /* GRID */
 
@@ -696,7 +1098,15 @@ function drawChart(canvas, height) {
 
   ctx.lineWidth = 1;
 
-  for (let i = 1; i < 5; i++) {
+  for (
+
+    let i = 1;
+
+    i < 5;
+
+    i++
+
+  ) {
 
     const y =
 
@@ -704,9 +1114,21 @@ function drawChart(canvas, height) {
 
     ctx.beginPath();
 
-    ctx.moveTo(0, y);
+    ctx.moveTo(
 
-    ctx.lineTo(w, y);
+      0,
+
+      y
+
+    );
+
+    ctx.lineTo(
+
+      w,
+
+      y
+
+    );
 
     ctx.stroke();
 
@@ -758,29 +1180,63 @@ function drawChart(canvas, height) {
 
   ];
 
-  const points = values.map(
+  const points =
 
-    (value, index) => {
+    values.map(
 
-      const x =
+      (value, index) => {
 
-        (index / (values.length - 1)) * w;
+        const x =
 
-      const y =
+          (
 
-        h - (value * (h - 20)) - 10;
+            index /
 
-      return { x, y };
+            (values.length - 1)
 
-    }
+          ) * w;
 
-  );
+        const y =
+
+          h -
+
+          (
+
+            value *
+
+            (h - 20)
+
+          ) -
+
+          10;
+
+        return {
+
+          x,
+
+          y
+
+        };
+
+      }
+
+    );
 
   /* AREA */
 
   const gradient =
 
-    ctx.createLinearGradient(0, 0, 0, h);
+    ctx.createLinearGradient(
+
+      0,
+
+      0,
+
+      0,
+
+      h
+
+    );
 
   gradient.addColorStop(
 
@@ -808,21 +1264,29 @@ function drawChart(canvas, height) {
 
   );
 
-  points.forEach(point => {
+  points.forEach(
 
-    ctx.lineTo(
+    point => {
 
-      point.x,
+      ctx.lineTo(
 
-      point.y
+        point.x,
 
-    );
+        point.y
 
-  });
+      );
+
+    }
+
+  );
 
   ctx.lineTo(
 
-    points[points.length - 1].x,
+    points[
+
+      points.length - 1
+
+    ].x,
 
     h
 
@@ -830,7 +1294,9 @@ function drawChart(canvas, height) {
 
   ctx.closePath();
 
-  ctx.fillStyle = gradient;
+  ctx.fillStyle =
+
+    gradient;
 
   ctx.fill();
 
@@ -872,11 +1338,17 @@ function drawChart(canvas, height) {
 
     "#f5c542";
 
-  ctx.lineWidth = 2.5;
+  ctx.lineWidth =
 
-  ctx.lineJoin = "round";
+    2.5;
 
-  ctx.lineCap = "round";
+  ctx.lineJoin =
+
+    "round";
+
+  ctx.lineCap =
+
+    "round";
 
   ctx.stroke();
 
@@ -884,7 +1356,11 @@ function drawChart(canvas, height) {
 
   const last =
 
-    points[points.length - 1];
+    points[
+
+      points.length - 1
+
+    ];
 
   ctx.beginPath();
 
@@ -916,99 +1392,157 @@ function drawChart(canvas, height) {
 
    ========================================================= */
 
-document.getElementById("savePriceBtn")
+document
 
-  .addEventListener("click", () => {
+  .getElementById(
 
-    const newPrice =
+    "savePriceBtn"
 
-      Number(
+  )
+
+  .addEventListener(
+
+    "click",
+
+    () => {
+
+      const input =
 
         document.getElementById(
 
           "adminPriceInput"
 
-        ).value
+        );
 
-      );
+      const newPrice =
 
-    if (!newPrice || newPrice < 1) {
+        Number(
+
+          input.value
+
+        );
+
+      if (
+
+        !newPrice ||
+
+        newPrice < 1
+
+      ) {
+
+        showToast(
+
+          "نرخێکی دروست بنووسە."
+
+        );
+
+        return;
+
+      }
+
+      state.price =
+
+        newPrice;
+
+      saveState();
+
+      updateUI();
 
       showToast(
 
-        "نرخێکی دروست بنووسە."
+        `نرخی دینار کرا بە ${formatNumber(newPrice)}.`
 
       );
 
-      return;
-
     }
 
-    state.price =
-
-      newPrice;
-
-    saveState();
-
-    updateUI();
-
-    showToast(
-
-      `نرخی دینار کرا بە ${formatNumber(newPrice)}.`
-
-    );
-
-  });
+  );
 
 /* =========================================================
 
-   EYE / HIDE BALANCE
+   HIDE BALANCE
 
    ========================================================= */
 
-document.getElementById("eyeBtn")
+document
 
-  .addEventListener("click", () => {
+  .getElementById(
 
-    balanceHidden =
+    "eyeBtn"
 
-      !balanceHidden;
+  )
 
-    updateUI();
+  .addEventListener(
 
-  });
+    "click",
+
+    () => {
+
+      balanceHidden =
+
+        !balanceHidden;
+
+      updateUI();
+
+    }
+
+  );
 
 /* =========================================================
 
-   SIDE MENU
+   MENU
 
    ========================================================= */
 
 const sideMenu =
 
-  document.getElementById("sideMenu");
+  document.getElementById(
+
+    "sideMenu"
+
+  );
 
 const menuBtn =
 
-  document.getElementById("menuBtn");
+  document.getElementById(
+
+    "menuBtn"
+
+  );
 
 const closeMenuButton =
 
-  document.getElementById("closeMenu");
+  document.getElementById(
+
+    "closeMenu"
+
+  );
 
 const sideOverlay =
 
-  document.getElementById("sideOverlay");
+  document.getElementById(
+
+    "sideOverlay"
+
+  );
 
 function openMenu() {
 
-  sideMenu.classList.add("open");
+  sideMenu.classList.add(
+
+    "open"
+
+  );
 
 }
 
 function closeMenu() {
 
-  sideMenu.classList.remove("open");
+  sideMenu.classList.remove(
+
+    "open"
+
+  );
 
 }
 
@@ -1038,21 +1572,33 @@ sideOverlay.addEventListener(
 
 /* =========================================================
 
-   NOTIFICATIONS
+   NOTIFICATION
 
    ========================================================= */
 
-document.getElementById("notificationBtn")
+document
 
-  .addEventListener("click", () => {
+  .getElementById(
 
-    showToast(
+    "notificationBtn"
 
-      "هیچ ئاگادارکردنەوەیەکی نوێ نییە 🔔"
+  )
 
-    );
+  .addEventListener(
 
-  });
+    "click",
+
+    () => {
+
+      showToast(
+
+        "هیچ ئاگادارکردنەوەیەکی نوێ نییە 🔔"
+
+      );
+
+    }
+
+  );
 
 /* =========================================================
 
@@ -1060,13 +1606,171 @@ document.getElementById("notificationBtn")
 
    ========================================================= */
 
-document.getElementById("logoutBtn")
+document
 
-  .addEventListener("click", () => {
+  .getElementById(
 
-    showToast(
+    "logoutBtn"
 
-      "ئەمە تەنها وەشانی demo ـی ئەپەکەیە."
+  )
+
+  .addEventListener(
+
+    "click",
+
+    () => {
+
+      showToast(
+
+        "ئەمە وەشانی demo ـی دینارە."
+
+      );
+
+    }
+
+  );
+
+/* =========================================================
+
+   PERIOD BUTTONS
+
+   ========================================================= */
+
+document
+
+  .querySelectorAll(".periods button")
+
+  .forEach(button => {
+
+    button.addEventListener(
+
+      "click",
+
+      () => {
+
+        document
+
+          .querySelectorAll(".periods button")
+
+          .forEach(item => {
+
+            item.classList.remove(
+
+              "active"
+
+            );
+
+          });
+
+        button.classList.add(
+
+          "active"
+
+        );
+
+        showToast(
+
+          `ماوەی گراف: ${button.textContent}`
+
+        );
+
+      }
+
+    );
+
+  });
+
+/* =========================================================
+
+   HISTORY TABS
+
+   ========================================================= */
+
+document
+
+  .querySelectorAll(".history-tabs button")
+
+  .forEach(button => {
+
+    button.addEventListener(
+
+      "click",
+
+      () => {
+
+        document
+
+          .querySelectorAll(".history-tabs button")
+
+          .forEach(item => {
+
+            item.classList.remove(
+
+              "active"
+
+            );
+
+          });
+
+        button.classList.add(
+
+          "active"
+
+        );
+
+        const filter =
+
+          button.textContent.trim();
+
+        const all =
+
+          document.getElementById(
+
+            "allTransactions"
+
+          );
+
+        let transactions =
+
+          state.transactions || [];
+
+        if (filter === "کڕین") {
+
+          transactions =
+
+            transactions.filter(
+
+              item =>
+
+                item.type === "buy"
+
+            );
+
+        }
+
+        if (filter === "سیستەم") {
+
+          transactions =
+
+            transactions.filter(
+
+              item =>
+
+                item.type === "system"
+
+            );
+
+        }
+
+        all.innerHTML =
+
+          transactions
+
+            .map(transactionHTML)
+
+            .join("");
+
+      }
 
     );
 
@@ -1086,17 +1790,37 @@ window.addEventListener(
 
     const home =
 
-      document.getElementById("homePage");
+      document.getElementById(
+
+        "homePage"
+
+      );
 
     const market =
 
-      document.getElementById("marketPage");
+      document.getElementById(
 
-    if (home.classList.contains("active")) {
+        "marketPage"
+
+      );
+
+    if (
+
+      home.classList.contains(
+
+        "active"
+
+      )
+
+    ) {
 
       drawChart(
 
-        document.getElementById("homeChart"),
+        document.getElementById(
+
+          "homeChart"
+
+        ),
 
         155
 
@@ -1104,11 +1828,23 @@ window.addEventListener(
 
     }
 
-    if (market.classList.contains("active")) {
+    if (
+
+      market.classList.contains(
+
+        "active"
+
+      )
+
+    ) {
 
       drawChart(
 
-        document.getElementById("marketChart"),
+        document.getElementById(
+
+          "marketChart"
+
+        ),
 
         245
 
@@ -1122,7 +1858,7 @@ window.addEventListener(
 
 /* =========================================================
 
-   INITIALIZE
+   START APP
 
    ========================================================= */
 
@@ -1134,11 +1870,25 @@ document.addEventListener(
 
     updateUI();
 
-    drawChart(
+    setTimeout(
 
-      document.getElementById("homeChart"),
+      () => {
 
-      155
+        drawChart(
+
+          document.getElementById(
+
+            "homeChart"
+
+          ),
+
+          155
+
+        );
+
+      },
+
+      100
 
     );
 
