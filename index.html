@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Kurdistan - پلاتفۆرمی فۆرێکس و شیکاری بازاڕ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="logo-title">FOREX <span>KURDISTAN</span></div>
+                <div class="logo-sub">بازاڕی کاتڕاستەقینە</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="user-avatar">س</div>
+                    <span>سەروان جەلال</span>
+                </div>
+                <button class="icon-btn">☰</button>
+            </div>
+        </div>
+
+        <!-- Ticker -->
+        <div class="market-ticker">
+            <div class="ticker-item">
+                <div class="ticker-pair">EUR/USD</div>
+                <div class="ticker-price">1.08451</div>
+                <div class="ticker-change text-green">+0.015%</div>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-pair">GBP/USD</div>
+                <div class="ticker-price">1.26370</div>
+                <div class="ticker-change text-red">-0.008%</div>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-pair">USD/JPY</div>
+                <div class="ticker-price">151.890</div>
+                <div class="ticker-change text-green">+0.042%</div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <span class="chart-pair-info">EUR/USD • H1</span>
+                <span style="font-size: 12px; color: #0ecb81; font-weight: bold;">ڕاستەقینە (Live)</span>
+            </div>
+            <div class="chart-box">
+                <svg class="chart-svg" viewBox="0 0 300 150" preserveAspectRatio="none">
+                    <!-- Grid lines -->
+                    <line x1="0" y1="37" x2="300" y2="37" stroke="#222d42" stroke-dasharray="2" />
+                    <line x1="0" y1="75" x2="300" y2="75" stroke="#222d42" stroke-dasharray="2" />
+                    <line x1="0" y1="112" x2="300" y2="112" stroke="#222d42" stroke-dasharray="2" />
+                    
+                    <!-- Candlestick representation using paths -->
+                    <path d="M20,90 L20,110 M18,95 L22,95 M18,105 L22,105" stroke="#f6465d" stroke-width="2"/>
+                    <path d="M50,70 L50,100 M48,75 L52,75 M48,95 L52,95" stroke="#0ecb81" stroke-width="2"/>
+                    <path d="M80,60 L80,95 M78,65 L82,65" stroke="#f6465d" stroke-width="2"/>
+                    <path d="M110,50 L110,80 M108,55 L112,55" stroke="#0ecb81" stroke-width="2"/>
+                    <path d="M140,65 L140,90 M138,70 L142,70" stroke="#f6465d" stroke-width="2"/>
+                    <path d="M170,40 L170,75 M168,45 L172,45" stroke="#0ecb81" stroke-width="2"/>
+                    <path d="M200,30 L200,60 M198,35 L202,35" stroke="#0ecb81" stroke-width="2"/>
+                    <path d="M230,45 L230,70 M228,50 L232,50" stroke="#f6465d" stroke-width="2"/>
+                    <path d="M260,25 L260,55 M258,30 L262,30" stroke="#0ecb81" stroke-width="2"/>
+                    
+                    <!-- Trend line -->
+                    <polyline fill="none" stroke="#f3ba2f" stroke-width="1.5" points="20,100 50,85 80,75 110,65 140,80 170,55 200,45 230,60 260,35" />
+                </svg>
+                <div class="chart-indicators">
+                    <span>RSI: 58.4</span>
+                    <span>MACD: Positive</span>
+                    <span>Vol: 1.45M</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Section -->
+        <div class="portfolio-section">
+            <div class="section-title">
+                <span>پۆرتفۆلیۆ (کراوەکان)</span>
+                <span style="color: #0ecb81;">قازانج: +$31.00</span>
+            </div>
+            <div class="portfolio-table">
+                <div class="table-row">
+                    <span style="font-weight: bold;">EUR/USD</span>
+                    <span class="text-green">0.50 BUY</span>
+                    <span>1.08390</span>
+                    <span class="text-green">+$31.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-panel">
+            <button class="btn btn-buy">
+                <span>کڕین (BUY)</span>
+                <span class="btn-sub">1.08455</span>
+            </button>
+            <button class="btn btn-sell">
+                <span>فرۆشتن (SELL)</span>
+                <span class="btn-sub">1.08450</span>
+            </button>
+        </div>
+
+        <!-- Risk Warning -->
+        <div class="risk-warning">
+            ئاگاداری مەترسی: تڕەیدکردن پێویستی بە زانیاری و وردبینی هەیە.
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                سەرەکی
+            </a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                شیکاری
+            </a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                هاوکاری
+            </a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
