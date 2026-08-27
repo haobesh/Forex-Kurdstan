@@ -1,410 +1,939 @@
 <!DOCTYPE html>
+
 <html lang="ku" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forex Kurdistan - پلاتفۆرمی فۆرێکس و شیکاری بازاڕ</title>
-    <style>
-        :root {
-            --bg-main: #0b0e14;
-            --bg-card: #121824;
-            --bg-panel: #182030;
-            --accent-green: #0ecb81;
-            --accent-red: #f6465d;
-            --accent-gold: #f3ba2f;
-            --text-main: #ffffff;
-            --text-muted: #848e9c;
-            --border-color: #222d42;
-        }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
-        }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-        .app-container {
-            max-width: 480px;
-            margin: 0 auto;
-            background-color: var(--bg-card);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-            position: relative;
-            overflow-x: hidden;
-        }
+  <meta name="theme-color" content="#09090d">
 
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background-color: #161d2c;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .logo-area {
-            display: flex;
-            flex-direction: column;
-        }
-        .logo-title {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: var(--text-main);
-        }
-        .logo-title span {
-            color: var(--accent-gold);
-        }
-        .logo-sub {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .user-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--accent-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--bg-main);
-            font-size: 12px;
-            font-weight: bold;
-        }
-        .icon-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 18px;
-            cursor: pointer;
-        }
+  <title>DINAR — دینار</title>
 
-        /* Market Watch Ticker */
-        .market-ticker {
-            display: flex;
-            gap: 10px;
-            padding: 10px 15px;
-            overflow-x: auto;
-            background-color: #0e131b;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .ticker-item {
-            background-color: #1a2233;
-            padding: 8px 12px;
-            border-radius: 8px;
-            min-width: 110px;
-            flex-shrink: 0;
-            border: 1px solid var(--border-color);
-        }
-        .ticker-pair {
-            font-size: 12px;
-            font-weight: bold;
-            color: #c9d1d9;
-        }
-        .ticker-price {
-            font-size: 13px;
-            font-weight: bold;
-            margin: 2px 0;
-        }
-        .ticker-change {
-            font-size: 11px;
-        }
-        .text-green { color: var(--accent-green); }
-        .text-red { color: var(--accent-red); }
+  <link rel="stylesheet" href="style.css">
 
-        /* Chart Section */
-        .chart-section {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .chart-pair-info {
-            font-size: 14px;
-            font-weight: bold;
-        }
-        .chart-box {
-            background-color: var(--bg-panel);
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            height: 240px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
-        .chart-svg {
-            width: 100%;
-            height: 150px;
-        }
-        .chart-indicators {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            padding-top: 8px;
-        }
-
-        /* Portfolio Section */
-        .portfolio-section {
-            padding: 0 15px 15px 15px;
-        }
-        .section-title {
-            font-size: 13px;
-            font-weight: bold;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .portfolio-table {
-            background-color: var(--bg-panel);
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            font-size: 12px;
-        }
-        .table-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .table-row:last-child {
-            border-bottom: none;
-        }
-
-        /* Trading Action Buttons */
-        .action-panel {
-            padding: 15px;
-            background-color: #161d2c;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            gap: 12px;
-        }
-        .btn {
-            flex: 1;
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-        .btn-buy {
-            background-color: var(--accent-green);
-            color: var(--bg-main);
-        }
-        .btn-sell {
-            background-color: var(--accent-red);
-            color: #ffffff;
-        }
-        .btn-sub {
-            font-size: 11px;
-            opacity: 0.8;
-            font-weight: normal;
-        }
-
-        /* Risk warning */
-        .risk-warning {
-            font-size: 9px;
-            color: var(--text-muted);
-            text-align: center;
-            padding: 8px 15px;
-            background-color: #0a0e14;
-        }
-
-        /* Bottom Nav */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            background-color: #0e131b;
-            padding: 10px 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 10px;
-            gap: 4px;
-        }
-        .nav-item.active {
-            color: var(--accent-gold);
-        }
-        .nav-item svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-    </style>
 </head>
+
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo-area">
-                <div class="logo-title">FOREX <span>KURDISTAN</span></div>
-                <div class="logo-sub">بازاڕی کاتڕاستەقینە</div>
-            </div>
-            <div class="header-right">
-                <div class="user-info">
-                    <div class="user-avatar">س</div>
-                    <span>سەروان جەلال</span>
-                </div>
-                <button class="icon-btn">☰</button>
-            </div>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- APP -->
+
+  <main class="app">
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+      <div class="brand">
+
+        <div class="brand-coin">D</div>
+
+        <div>
+
+          <strong>دینار</strong>
+
+          <small>DINAR</small>
+
         </div>
 
-        <!-- Ticker -->
-        <div class="market-ticker">
-            <div class="ticker-item">
-                <div class="ticker-pair">EUR/USD</div>
-                <div class="ticker-price">1.08451</div>
-                <div class="ticker-change text-green">+0.015%</div>
-            </div>
-            <div class="ticker-item">
-                <div class="ticker-pair">GBP/USD</div>
-                <div class="ticker-price">1.26370</div>
-                <div class="ticker-change text-red">-0.008%</div>
-            </div>
-            <div class="ticker-item">
-                <div class="ticker-pair">USD/JPY</div>
-                <div class="ticker-price">151.890</div>
-                <div class="ticker-change text-green">+0.042%</div>
-            </div>
+      </div>
+
+      <div class="top-actions">
+
+        <button class="icon-btn" id="notificationBtn">🔔</button>
+
+        <button class="icon-btn" id="menuBtn">☰</button>
+
+      </div>
+
+    </header>
+
+    <!-- PAGES -->
+
+    <!-- HOME -->
+
+    <section class="page active" id="homePage">
+
+      <div class="balance-card">
+
+        <div class="balance-head">
+
+          <span>کۆی دینارەکانت</span>
+
+          <span class="eye" id="eyeBtn">◉</span>
+
         </div>
 
-        <!-- Chart Section -->
-        <div class="chart-section">
-            <div class="chart-header">
-                <span class="chart-pair-info">EUR/USD • H1</span>
-                <span style="font-size: 12px; color: #0ecb81; font-weight: bold;">ڕاستەقینە (Live)</span>
-            </div>
-            <div class="chart-box">
-                <svg class="chart-svg" viewBox="0 0 300 150" preserveAspectRatio="none">
-                    <line x1="0" y1="37" x2="300" y2="37" stroke="#222d42" stroke-dasharray="2" />
-                    <line x1="0" y1="75" x2="300" y2="75" stroke="#222d42" stroke-dasharray="2" />
-                    <line x1="0" y1="112" x2="300" y2="112" stroke="#222d42" stroke-dasharray="2" />
-                    
-                    <path d="M20,90 L20,110 M18,95 L22,95 M18,105 L22,105" stroke="#f6465d" stroke-width="2"/>
-                    <path d="M50,70 L50,100 M48,75 L52,75 M48,95 L52,95" stroke="#0ecb81" stroke-width="2"/>
-                    <path d="M80,60 L80,95 M78,65 L82,65" stroke="#f6465d" stroke-width="2"/>
-                    <path d="M110,50 L110,80 M108,55 L112,55" stroke="#0ecb81" stroke-width="2"/>
-                    <path d="M140,65 L140,90 M138,70 L142,70" stroke="#f6465d" stroke-width="2"/>
-                    <path d="M170,40 L170,75 M168,45 L172,45" stroke="#0ecb81" stroke-width="2"/>
-                    <path d="M200,30 L200,60 M198,35 L202,35" stroke="#0ecb81" stroke-width="2"/>
-                    <path d="M230,45 L230,70 M228,50 L232,50" stroke="#f6465d" stroke-width="2"/>
-                    <path d="M260,25 L260,55 M258,30 L262,30" stroke="#0ecb81" stroke-width="2"/>
-                    
-                    <polyline fill="none" stroke="#f3ba2f" stroke-width="1.5" points="20,100 50,85 80,75 110,65 140,80 170,55 200,45 230,60 260,35" />
-                </svg>
-                <div class="chart-indicators">
-                    <span>RSI: 58.4</span>
-                    <span>MACD: Positive</span>
-                    <span>Vol: 1.45M</span>
-                </div>
-            </div>
+        <div class="balance-value" id="homeBalance">250,000</div>
+
+        <div class="currency-name">دینار</div>
+
+        <div class="balance-footer">
+
+          <div>
+
+            <small>بەهای ئێستا</small>
+
+            <strong id="homeUsd">$250.00</strong>
+
+          </div>
+
+          <div class="profit positive">
+
+            <span>▲</span>
+
+            <span id="homeChange">+2.35%</span>
+
+          </div>
+
         </div>
 
-        <!-- Portfolio Section -->
-        <div class="portfolio-section">
-            <div class="section-title">
-                <span>پۆرتفۆلیۆ (کراوەکان)</span>
-                <span style="color: #0ecb81;">قازانج: +$31.00</span>
-            </div>
-            <div class="portfolio-table">
-                <div class="table-row">
-                    <span style="font-weight: bold;">EUR/USD</span>
-                    <span class="text-green">0.50 BUY</span>
-                    <span>1.08390</span>
-                    <span class="text-green">+$31.00</span>
-                </div>
-            </div>
+      </div>
+
+      <div class="market-mini">
+
+        <div>
+
+          <small>نرخی ١٠,٠٠٠ دینار</small>
+
+          <strong id="miniPrice">$10.00</strong>
+
         </div>
 
-        <!-- Action Buttons -->
-        <div class="action-panel">
-            <button class="btn btn-buy">
-                <span>کڕین (BUY)</span>
-                <span class="btn-sub">1.08455</span>
-            </button>
-            <button class="btn btn-sell">
-                <span>فرۆشتن (SELL)</span>
-                <span class="btn-sub">1.08450</span>
-            </button>
+        <div>
+
+          <small>گۆڕانی ٢٤ کاتژمێر</small>
+
+          <strong class="green">+2.35%</strong>
+
         </div>
 
-        <!-- Risk Warning -->
-        <div class="risk-warning">
-            ئاگاداری مەترسی: تڕەیدکردن پێویستی بە زانیاری و وردبینی هەیە.
+      </div>
+
+      <div class="section-title">
+
+        <h2>بازاڕ</h2>
+
+        <button onclick="openPage('marketPage')">بینین</button>
+
+      </div>
+
+      <div class="chart-card">
+
+        <div class="chart-header">
+
+          <div>
+
+            <small>نرخی دینار</small>
+
+            <strong id="chartPrice">10,000 دینار</strong>
+
+          </div>
+
+          <span class="green">+2.35%</span>
+
         </div>
 
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <a href="#" class="nav-item active">
-                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                سەرەکی
-            </a>
-            <a href="#" class="nav-item">
-                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                شیکاری
-            </a>
-            <a href="#" class="nav-item">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                هاوکاری
-            </a>
-        </div>
-    </div>
+        <canvas id="homeChart"></canvas>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const prices = document.querySelectorAll('.ticker-price');
-            setInterval(() => {
-                prices.forEach(priceEl => {
-                    const currentVal = parseFloat(priceEl.textContent);
-                    const delta = (Math.random() - 0.5) * 0.0002;
-                    priceEl.textContent = (currentVal + delta).toFixed(5);
-                });
-            }, 3000);
-        });
-    </script>
+        <div class="chart-labels">
+
+          <span>١٧/٠٨</span>
+
+          <span>١٩/٠٨</span>
+
+          <span>٢١/٠٨</span>
+
+          <span>٢٣/٠٨</span>
+
+        </div>
+
+      </div>
+
+      <div class="quick-actions">
+
+        <button class="quick buy" onclick="openPage('buyPage')">
+
+          <span>🛒</span>
+
+          <strong>کڕینی دینار</strong>
+
+        </button>
+
+        <button class="quick market" onclick="openPage('marketPage')">
+
+          <span>📈</span>
+
+          <strong>نرخ و گراف</strong>
+
+        </button>
+
+        <button class="quick wallet" onclick="openPage('walletPage')">
+
+          <span>👛</span>
+
+          <strong>Wallet</strong>
+
+        </button>
+
+        <button class="quick history" onclick="openPage('historyPage')">
+
+          <span>🕘</span>
+
+          <strong>مێژوو</strong>
+
+        </button>
+
+      </div>
+
+      <div class="section-title">
+
+        <h2>دوایین مامەڵەکان</h2>
+
+        <button onclick="openPage('historyPage')">هەمووی</button>
+
+      </div>
+
+      <div id="homeTransactions" class="transactions"></div>
+
+    </section>
+
+    <!-- BUY -->
+
+    <section class="page" id="buyPage">
+
+      <div class="page-heading">
+
+        <button class="back-btn" onclick="openPage('homePage')">→</button>
+
+        <h1>کڕینی دینار</h1>
+
+      </div>
+
+      <div class="coin-hero">
+
+        <div class="big-coin">D</div>
+
+        <div>
+
+          <h2>دینار</h2>
+
+          <p>دراوی دیجیتاڵی ناوخۆی ئەپ</p>
+
+        </div>
+
+      </div>
+
+      <div class="price-box">
+
+        <small>نرخی ئێستا</small>
+
+        <strong id="buyPrice">$10.00</strong>
+
+        <span>بۆ هەر ١٠,٠٠٠ دینار</span>
+
+      </div>
+
+      <div class="input-card">
+
+        <label>بڕی دینار</label>
+
+        <div class="amount-input">
+
+          <input type="number" id="buyAmount" value="10000" min="1000" step="1000">
+
+          <span>دینار</span>
+
+        </div>
+
+        <input
+
+          type="range"
+
+          id="amountSlider"
+
+          min="1000"
+
+          max="1000000"
+
+          step="1000"
+
+          value="10000"
+
+        >
+
+        <div class="range-values">
+
+          <span>١,٠٠٠</span>
+
+          <span>١,٠٠٠,٠٠٠</span>
+
+        </div>
+
+      </div>
+
+      <div class="summary-card">
+
+        <div>
+
+          <span>بڕی دینار</span>
+
+          <strong id="summaryDinar">10,000</strong>
+
+        </div>
+
+        <div>
+
+          <span>کۆی پارە</span>
+
+          <strong id="summaryUsd">$10.00</strong>
+
+        </div>
+
+      </div>
+
+      <div class="payment-title">
+
+        <h3>شێوازی پارەدان</h3>
+
+      </div>
+
+      <div class="payment-methods">
+
+        <button class="payment active" data-payment="Visa">
+
+          <strong>VISA</strong>
+
+        </button>
+
+        <button class="payment" data-payment="Mastercard">
+
+          <strong>● ●</strong>
+
+        </button>
+
+        <button class="payment" data-payment="Apple Pay">
+
+          <strong>Pay</strong>
+
+        </button>
+
+        <button class="payment" data-payment="PayPal">
+
+          <strong>PayPal</strong>
+
+        </button>
+
+      </div>
+
+      <button class="main-btn" id="buyBtn">
+
+        کڕینی <span id="buyButtonAmount">10,000</span> دینار
+
+      </button>
+
+      <p class="secure-note">🔒 مامەڵەکە بە شێوەی پارێزراو تۆمار دەکرێت.</p>
+
+    </section>
+
+    <!-- WALLET -->
+
+    <section class="page" id="walletPage">
+
+      <div class="page-heading">
+
+        <button class="back-btn" onclick="openPage('homePage')">→</button>
+
+        <h1>Wallet</h1>
+
+      </div>
+
+      <div class="wallet-card">
+
+        <div class="wallet-top">
+
+          <span>باڵانسی دینار</span>
+
+          <span>🪙</span>
+
+        </div>
+
+        <strong id="walletBalance">250,000</strong>
+
+        <small>دینار</small>
+
+        <div class="wallet-usd">
+
+          ≈ <span id="walletUsd">$250.00</span>
+
+        </div>
+
+      </div>
+
+      <div class="wallet-actions">
+
+        <button onclick="openPage('buyPage')">
+
+          <span>＋</span>
+
+          زیادکردن
+
+        </button>
+
+        <button onclick="openPage('historyPage')">
+
+          <span>↗</span>
+
+          مامەڵەکان
+
+        </button>
+
+        <button onclick="openPage('marketPage')">
+
+          <span>⇄</span>
+
+          نرخ
+
+        </button>
+
+      </div>
+
+      <div class="details-card">
+
+        <div>
+
+          <span>دیناری بەردەست</span>
+
+          <strong id="availableBalance">250,000</strong>
+
+        </div>
+
+        <div>
+
+          <span>دیناری قەفلکراو</span>
+
+          <strong>0</strong>
+
+        </div>
+
+        <div>
+
+          <span>کۆی بەها</span>
+
+          <strong id="totalValue">$250.00</strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MARKET -->
+
+    <section class="page" id="marketPage">
+
+      <div class="page-heading">
+
+        <button class="back-btn" onclick="openPage('homePage')">→</button>
+
+        <h1>نرخ و گراف</h1>
+
+      </div>
+
+      <div class="market-price-card">
+
+        <div>
+
+          <small>نرخی ئێستا</small>
+
+          <h2 id="marketPrice">10,000</h2>
+
+          <span>دینار = $10.00</span>
+
+        </div>
+
+        <div class="change green">+2.35%</div>
+
+      </div>
+
+      <div class="periods">
+
+        <button>24h</button>
+
+        <button class="active">7D</button>
+
+        <button>30D</button>
+
+        <button>90D</button>
+
+        <button>1Y</button>
+
+        <button>All</button>
+
+      </div>
+
+      <div class="large-chart">
+
+        <canvas id="marketChart"></canvas>
+
+      </div>
+
+      <div class="market-stats">
+
+        <div>
+
+          <small>نرخی بەرزترین</small>
+
+          <strong>10,850</strong>
+
+        </div>
+
+        <div>
+
+          <small>نرخی نزمترین</small>
+
+          <strong>9,650</strong>
+
+        </div>
+
+        <div>
+
+          <small>کۆی گۆڕان</small>
+
+          <strong class="green">+2.35%</strong>
+
+        </div>
+
+        <div>
+
+          <small>حەجمی مامەڵە</small>
+
+          <strong>10,000,000</strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- HISTORY -->
+
+    <section class="page" id="historyPage">
+
+      <div class="page-heading">
+
+        <button class="back-btn" onclick="openPage('homePage')">→</button>
+
+        <h1>مێژووی مامەڵەکان</h1>
+
+      </div>
+
+      <div class="history-tabs">
+
+        <button class="active">هەموو</button>
+
+        <button>کڕین</button>
+
+        <button>سیستەم</button>
+
+      </div>
+
+      <div id="allTransactions" class="transactions full"></div>
+
+    </section>
+
+    <!-- PROFILE -->
+
+    <section class="page" id="profilePage">
+
+      <div class="page-heading">
+
+        <button class="back-btn" onclick="openPage('homePage')">→</button>
+
+        <h1>پڕۆفایل</h1>
+
+        <button class="settings-btn">⚙</button>
+
+      </div>
+
+      <div class="profile-card">
+
+        <div class="avatar">V</div>
+
+        <div>
+
+          <h2>بەکارهێنەر</h2>
+
+          <p>user@dinar.app</p>
+
+          <span class="verified">✓ پشتڕاستکراوە</span>
+
+        </div>
+
+      </div>
+
+      <div class="settings-list">
+
+        <button>
+
+          <span>👤</span>
+
+          <div>
+
+            <strong>زانیاری هەژمار</strong>
+
+            <small>ناو و زانیارییەکان</small>
+
+          </div>
+
+          <b>‹</b>
+
+        </button>
+
+        <button>
+
+          <span>🔒</span>
+
+          <div>
+
+            <strong>پاراستن</strong>
+
+            <small>وشەی نهێنی و 2FA</small>
+
+          </div>
+
+          <b>‹</b>
+
+        </button>
+
+        <button>
+
+          <span>🌐</span>
+
+          <div>
+
+            <strong>زمان</strong>
+
+            <small>کوردی</small>
+
+          </div>
+
+          <b>‹</b>
+
+        </button>
+
+        <button>
+
+          <span>🔔</span>
+
+          <div>
+
+            <strong>ئاگادارکردنەوەکان</strong>
+
+            <small>ڕێکخستنەکانی ئاگادارکردنەوە</small>
+
+          </div>
+
+          <b>‹</b>
+
+        </button>
+
+        <button>
+
+          <span>ℹ️</span>
+
+          <div>
+
+            <strong>دەربارەی دینار</strong>
+
+            <small>وەشانی 1.0.0</small>
+
+          </div>
+
+          <b>‹</b>
+
+        </button>
+
+      </div>
+
+      <button class="logout-btn" id="logoutBtn">چوونەدەرەوە</button>
+
+    </section>
+
+    <!-- ADMIN -->
+
+    <section class="page" id="adminPage">
+
+      <div class="page-heading">
+
+        <button class="back-btn" onclick="openPage('homePage')">→</button>
+
+        <h1>Admin Panel</h1>
+
+      </div>
+
+      <div class="admin-grid">
+
+        <div class="admin-stat">
+
+          <span>👥</span>
+
+          <small>بەکارهێنەران</small>
+
+          <strong>12,458</strong>
+
+        </div>
+
+        <div class="admin-stat">
+
+          <span>🪙</span>
+
+          <small>دیناری دابینکراو</small>
+
+          <strong>245.6M</strong>
+
+        </div>
+
+        <div class="admin-stat">
+
+          <span>📊</span>
+
+          <small>مامەڵەکان</small>
+
+          <strong>8,745</strong>
+
+        </div>
+
+        <div class="admin-stat">
+
+          <span>💵</span>
+
+          <small>نرخی ئێستا</small>
+
+          <strong id="adminPrice">10,000</strong>
+
+        </div>
+
+      </div>
+
+      <div class="admin-card">
+
+        <div class="admin-card-title">
+
+          <h3>کۆنترۆڵی نرخ</h3>
+
+          <span>نرخی بنەڕەت</span>
+
+        </div>
+
+        <div class="admin-price-input">
+
+          <input type="number" id="adminPriceInput" value="10000">
+
+          <span>دینار</span>
+
+        </div>
+
+        <button class="main-btn" id="savePriceBtn">
+
+          پاشەکەوتکردنی نرخ
+
+        </button>
+
+      </div>
+
+      <div class="admin-card">
+
+        <div class="admin-card-title">
+
+          <h3>مامەڵە نوێیەکان</h3>
+
+          <span>ئەمڕۆ</span>
+
+        </div>
+
+        <div class="admin-row">
+
+          <span class="admin-avatar">U</span>
+
+          <div>
+
+            <strong>User_245</strong>
+
+            <small>کڕینی 100,000 دینار</small>
+
+          </div>
+
+          <b>+$100</b>
+
+        </div>
+
+        <div class="admin-row">
+
+          <span class="admin-avatar">S</span>
+
+          <div>
+
+            <strong>User_312</strong>
+
+            <small>کڕینی 50,000 دینار</small>
+
+          </div>
+
+          <b>+$50</b>
+
+        </div>
+
+        <div class="admin-row">
+
+          <span class="admin-avatar">A</span>
+
+          <div>
+
+            <strong>User_108</strong>
+
+            <small>کڕینی 200,000 دینار</small>
+
+          </div>
+
+          <b>+$200</b>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- BOTTOM NAV -->
+
+    <nav class="bottom-nav">
+
+      <button class="nav-item active" data-page="homePage">
+
+        <span>⌂</span>
+
+        <small>سەرەتا</small>
+
+      </button>
+
+      <button class="nav-item" data-page="walletPage">
+
+        <span>👛</span>
+
+        <small>Wallet</small>
+
+      </button>
+
+      <button class="nav-item buy-nav" data-page="buyPage">
+
+        <span>＋</span>
+
+        <small>Buy</small>
+
+      </button>
+
+      <button class="nav-item" data-page="historyPage">
+
+        <span>◷</span>
+
+        <small>مێژوو</small>
+
+      </button>
+
+      <button class="nav-item" data-page="profilePage">
+
+        <span>♙</span>
+
+        <small>پڕۆفایل</small>
+
+      </button>
+
+    </nav>
+
+  </main>
+
+  <!-- SIDE MENU -->
+
+  <div class="side-menu" id="sideMenu">
+
+    <div class="side-overlay" id="sideOverlay"></div>
+
+    <aside class="drawer">
+
+      <div class="drawer-head">
+
+        <div class="brand-coin">D</div>
+
+        <div>
+
+          <strong>DINAR</strong>
+
+          <small>دینار</small>
+
+        </div>
+
+        <button id="closeMenu">×</button>
+
+      </div>
+
+      <div class="drawer-links">
+
+        <button onclick="closeMenu(); openPage('homePage')">
+
+          🏠 سەرەتا
+
+        </button>
+
+        <button onclick="closeMenu(); openPage('buyPage')">
+
+          🪙 کڕینی دینار
+
+        </button>
+
+        <button onclick="closeMenu(); openPage('walletPage')">
+
+          👛 Wallet
+
+        </button>
+
+        <button onclick="closeMenu(); openPage('marketPage')">
+
+          📈 نرخ و گراف
+
+        </button>
+
+        <button onclick="closeMenu(); openPage('historyPage')">
+
+          📜 مامەڵەکان
+
+        </button>
+
+        <button onclick="closeMenu(); openPage('profilePage')">
+
+          👤 پڕۆفایل
+
+        </button>
+
+        <hr>
+
+        <button onclick="closeMenu(); openPage('adminPage')">
+
+          ⚙️ Admin Panel
+
+        </button>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script src="script.js"></script>
+
 </body>
+
 </html>
