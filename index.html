@@ -8,9 +8,25 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <meta name="theme-color" content="#09090d">
+  <meta name="theme-color" content="#08090d">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <title>DINAR — دینار</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800;900&display=swap"
+
+    rel="stylesheet"
+
+  >
 
   <link rel="stylesheet" href="style.css">
 
@@ -20,9 +36,7 @@
 
   <div id="toast" class="toast"></div>
 
-  <!-- APP -->
-
-  <main class="app">
+  <div class="app">
 
     <!-- HEADER -->
 
@@ -32,7 +46,7 @@
 
         <div class="brand-coin">D</div>
 
-        <div>
+        <div class="brand-text">
 
           <strong>دینار</strong>
 
@@ -44,17 +58,23 @@
 
       <div class="top-actions">
 
-        <button class="icon-btn" id="notificationBtn">🔔</button>
+        <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
 
-        <button class="icon-btn" id="menuBtn">☰</button>
+          🔔
+
+        </button>
+
+        <button class="icon-btn" id="menuBtn" aria-label="Menu">
+
+          ☰
+
+        </button>
 
       </div>
 
     </header>
 
-    <!-- PAGES -->
-
-    <!-- HOME -->
+    <!-- ================= HOME ================= -->
 
     <section class="page active" id="homePage">
 
@@ -64,13 +84,21 @@
 
           <span>کۆی دینارەکانت</span>
 
-          <span class="eye" id="eyeBtn">◉</span>
+          <button class="eye" id="eyeBtn">◉</button>
 
         </div>
 
-        <div class="balance-value" id="homeBalance">250,000</div>
+        <div class="balance-value" id="homeBalance">
 
-        <div class="currency-name">دینار</div>
+          250,000
+
+        </div>
+
+        <div class="currency-name">
+
+          دینار
+
+        </div>
 
         <div class="balance-footer">
 
@@ -84,9 +112,7 @@
 
           <div class="profit positive">
 
-            <span>▲</span>
-
-            <span id="homeChange">+2.35%</span>
+            ▲ +2.35%
 
           </div>
 
@@ -118,7 +144,11 @@
 
         <h2>بازاڕ</h2>
 
-        <button onclick="openPage('marketPage')">بینین</button>
+        <button onclick="openPage('marketPage')">
+
+          بینین
+
+        </button>
 
       </div>
 
@@ -134,7 +164,11 @@
 
           </div>
 
-          <span class="green">+2.35%</span>
+          <span class="green">
+
+            +2.35%
+
+          </span>
 
         </div>
 
@@ -156,7 +190,7 @@
 
       <div class="quick-actions">
 
-        <button class="quick buy" onclick="openPage('buyPage')">
+        <button class="quick" onclick="openPage('buyPage')">
 
           <span>🛒</span>
 
@@ -164,7 +198,7 @@
 
         </button>
 
-        <button class="quick market" onclick="openPage('marketPage')">
+        <button class="quick" onclick="openPage('marketPage')">
 
           <span>📈</span>
 
@@ -172,7 +206,7 @@
 
         </button>
 
-        <button class="quick wallet" onclick="openPage('walletPage')">
+        <button class="quick" onclick="openPage('walletPage')">
 
           <span>👛</span>
 
@@ -180,7 +214,7 @@
 
         </button>
 
-        <button class="quick history" onclick="openPage('historyPage')">
+        <button class="quick" onclick="openPage('historyPage')">
 
           <span>🕘</span>
 
@@ -194,7 +228,11 @@
 
         <h2>دوایین مامەڵەکان</h2>
 
-        <button onclick="openPage('historyPage')">هەمووی</button>
+        <button onclick="openPage('historyPage')">
+
+          هەمووی
+
+        </button>
 
       </div>
 
@@ -202,13 +240,23 @@
 
     </section>
 
-    <!-- BUY -->
+    <!-- ================= BUY ================= -->
 
     <section class="page" id="buyPage">
 
       <div class="page-heading">
 
-        <button class="back-btn" onclick="openPage('homePage')">→</button>
+        <button
+
+          class="back-btn"
+
+          onclick="openPage('homePage')"
+
+        >
+
+          →
+
+        </button>
 
         <h1>کڕینی دینار</h1>
 
@@ -216,7 +264,11 @@
 
       <div class="coin-hero">
 
-        <div class="big-coin">D</div>
+        <div class="big-coin">
+
+          D
+
+        </div>
 
         <div>
 
@@ -232,21 +284,49 @@
 
         <small>نرخی ئێستا</small>
 
-        <strong id="buyPrice">$10.00</strong>
+        <strong id="buyPrice">
 
-        <span>بۆ هەر ١٠,٠٠٠ دینار</span>
+          $10.00
+
+        </strong>
+
+        <span>
+
+          بۆ هەر ١٠,٠٠٠ دینار
+
+        </span>
 
       </div>
 
       <div class="input-card">
 
-        <label>بڕی دینار</label>
+        <label>
+
+          بڕی دینار
+
+        </label>
 
         <div class="amount-input">
 
-          <input type="number" id="buyAmount" value="10000" min="1000" step="1000">
+          <input
 
-          <span>دینار</span>
+            type="number"
+
+            id="buyAmount"
+
+            value="10000"
+
+            min="1000"
+
+            step="1000"
+
+          >
+
+          <span>
+
+            دینار
+
+          </span>
 
         </div>
 
@@ -282,7 +362,11 @@
 
           <span>بڕی دینار</span>
 
-          <strong id="summaryDinar">10,000</strong>
+          <strong id="summaryDinar">
+
+            10,000
+
+          </strong>
 
         </div>
 
@@ -290,7 +374,11 @@
 
           <span>کۆی پارە</span>
 
-          <strong id="summaryUsd">$10.00</strong>
+          <strong id="summaryUsd">
+
+            $10.00
+
+          </strong>
 
         </div>
 
@@ -332,21 +420,39 @@
 
       <button class="main-btn" id="buyBtn">
 
-        کڕینی <span id="buyButtonAmount">10,000</span> دینار
+        کڕینی
+
+        <span id="buyButtonAmount">10,000</span>
+
+        دینار
 
       </button>
 
-      <p class="secure-note">🔒 مامەڵەکە بە شێوەی پارێزراو تۆمار دەکرێت.</p>
+      <p class="secure-note">
+
+        🔒 مامەڵەکە بە شێوەی پارێزراو تۆمار دەکرێت.
+
+      </p>
 
     </section>
 
-    <!-- WALLET -->
+    <!-- ================= WALLET ================= -->
 
     <section class="page" id="walletPage">
 
       <div class="page-heading">
 
-        <button class="back-btn" onclick="openPage('homePage')">→</button>
+        <button
+
+          class="back-btn"
+
+          onclick="openPage('homePage')"
+
+        >
+
+          →
+
+        </button>
 
         <h1>Wallet</h1>
 
@@ -362,13 +468,27 @@
 
         </div>
 
-        <strong id="walletBalance">250,000</strong>
+        <strong id="walletBalance">
 
-        <small>دینار</small>
+          250,000
+
+        </strong>
+
+        <small>
+
+          دینار
+
+        </small>
 
         <div class="wallet-usd">
 
-          ≈ <span id="walletUsd">$250.00</span>
+          ≈
+
+          <span id="walletUsd">
+
+            $250.00
+
+          </span>
 
         </div>
 
@@ -408,7 +528,11 @@
 
           <span>دیناری بەردەست</span>
 
-          <strong id="availableBalance">250,000</strong>
+          <strong id="availableBalance">
+
+            250,000
+
+          </strong>
 
         </div>
 
@@ -424,7 +548,11 @@
 
           <span>کۆی بەها</span>
 
-          <strong id="totalValue">$250.00</strong>
+          <strong id="totalValue">
+
+            $250.00
+
+          </strong>
 
         </div>
 
@@ -432,13 +560,23 @@
 
     </section>
 
-    <!-- MARKET -->
+    <!-- ================= MARKET ================= -->
 
     <section class="page" id="marketPage">
 
       <div class="page-heading">
 
-        <button class="back-btn" onclick="openPage('homePage')">→</button>
+        <button
+
+          class="back-btn"
+
+          onclick="openPage('homePage')"
+
+        >
+
+          →
+
+        </button>
 
         <h1>نرخ و گراف</h1>
 
@@ -448,15 +586,31 @@
 
         <div>
 
-          <small>نرخی ئێستا</small>
+          <small>
 
-          <h2 id="marketPrice">10,000</h2>
+            نرخی ئێستا
 
-          <span>دینار = $10.00</span>
+          </small>
+
+          <h2 id="marketPrice">
+
+            10,000
+
+          </h2>
+
+          <span>
+
+            دینار = $10.00
+
+          </span>
 
         </div>
 
-        <div class="change green">+2.35%</div>
+        <div class="change green">
+
+          +2.35%
+
+        </div>
 
       </div>
 
@@ -520,57 +674,123 @@
 
     </section>
 
-    <!-- HISTORY -->
+    <!-- ================= HISTORY ================= -->
 
     <section class="page" id="historyPage">
 
       <div class="page-heading">
 
-        <button class="back-btn" onclick="openPage('homePage')">→</button>
+        <button
 
-        <h1>مێژووی مامەڵەکان</h1>
+          class="back-btn"
+
+          onclick="openPage('homePage')"
+
+        >
+
+          →
+
+        </button>
+
+        <h1>
+
+          مێژووی مامەڵەکان
+
+        </h1>
 
       </div>
 
       <div class="history-tabs">
 
-        <button class="active">هەموو</button>
+        <button class="active">
 
-        <button>کڕین</button>
+          هەموو
 
-        <button>سیستەم</button>
+        </button>
+
+        <button>
+
+          کڕین
+
+        </button>
+
+        <button>
+
+          سیستەم
+
+        </button>
 
       </div>
 
-      <div id="allTransactions" class="transactions full"></div>
+      <div
+
+        id="allTransactions"
+
+        class="transactions full"
+
+      ></div>
 
     </section>
 
-    <!-- PROFILE -->
+    <!-- ================= PROFILE ================= -->
 
     <section class="page" id="profilePage">
 
       <div class="page-heading">
 
-        <button class="back-btn" onclick="openPage('homePage')">→</button>
+        <button
 
-        <h1>پڕۆفایل</h1>
+          class="back-btn"
 
-        <button class="settings-btn">⚙</button>
+          onclick="openPage('homePage')"
+
+        >
+
+          →
+
+        </button>
+
+        <h1>
+
+          پڕۆفایل
+
+        </h1>
+
+        <button class="settings-btn">
+
+          ⚙
+
+        </button>
 
       </div>
 
       <div class="profile-card">
 
-        <div class="avatar">V</div>
+        <div class="avatar">
+
+          D
+
+        </div>
 
         <div>
 
-          <h2>بەکارهێنەر</h2>
+          <h2>
 
-          <p>user@dinar.app</p>
+            بەکارهێنەر
 
-          <span class="verified">✓ پشتڕاستکراوە</span>
+          </h2>
+
+          <p>
+
+            user@dinar.app
+
+          </p>
+
+          <span class="verified">
+
+            ✓ پشتڕاستکراوە
+
+          </span>
 
         </div>
 
@@ -584,9 +804,17 @@
 
           <div>
 
-            <strong>زانیاری هەژمار</strong>
+            <strong>
 
-            <small>ناو و زانیارییەکان</small>
+              زانیاری هەژمار
+
+            </strong>
+
+            <small>
+
+              ناو و زانیارییەکان
+
+            </small>
 
           </div>
 
@@ -600,9 +828,17 @@
 
           <div>
 
-            <strong>پاراستن</strong>
+            <strong>
 
-            <small>وشەی نهێنی و 2FA</small>
+              پاراستن
+
+            </strong>
+
+            <small>
+
+              وشەی نهێنی و 2FA
+
+            </small>
 
           </div>
 
@@ -616,9 +852,17 @@
 
           <div>
 
-            <strong>زمان</strong>
+            <strong>
 
-            <small>کوردی</small>
+              زمان
+
+            </strong>
+
+            <small>
+
+              کوردی
+
+            </small>
 
           </div>
 
@@ -632,9 +876,17 @@
 
           <div>
 
-            <strong>ئاگادارکردنەوەکان</strong>
+            <strong>
 
-            <small>ڕێکخستنەکانی ئاگادارکردنەوە</small>
+              ئاگادارکردنەوەکان
+
+            </strong>
+
+            <small>
+
+              ڕێکخستنەکانی ئاگادارکردنەوە
+
+            </small>
 
           </div>
 
@@ -648,9 +900,17 @@
 
           <div>
 
-            <strong>دەربارەی دینار</strong>
+            <strong>
 
-            <small>وەشانی 1.0.0</small>
+              دەربارەی دینار
+
+            </strong>
+
+            <small>
+
+              وەشانی 1.0.0
+
+            </small>
 
           </div>
 
@@ -660,19 +920,37 @@
 
       </div>
 
-      <button class="logout-btn" id="logoutBtn">چوونەدەرەوە</button>
+      <button class="logout-btn" id="logoutBtn">
+
+        چوونەدەرەوە
+
+      </button>
 
     </section>
 
-    <!-- ADMIN -->
+    <!-- ================= ADMIN ================= -->
 
     <section class="page" id="adminPage">
 
       <div class="page-heading">
 
-        <button class="back-btn" onclick="openPage('homePage')">→</button>
+        <button
 
-        <h1>Admin Panel</h1>
+          class="back-btn"
+
+          onclick="openPage('homePage')"
+
+        >
+
+          →
+
+        </button>
+
+        <h1>
+
+          Admin Panel
+
+        </h1>
 
       </div>
 
@@ -714,7 +992,11 @@
 
           <small>نرخی ئێستا</small>
 
-          <strong id="adminPrice">10,000</strong>
+          <strong id="adminPrice">
+
+            10,000
+
+          </strong>
 
         </div>
 
@@ -724,21 +1006,49 @@
 
         <div class="admin-card-title">
 
-          <h3>کۆنترۆڵی نرخ</h3>
+          <h3>
 
-          <span>نرخی بنەڕەت</span>
+            کۆنترۆڵی نرخ
+
+          </h3>
+
+          <span>
+
+            نرخی بنەڕەت
+
+          </span>
 
         </div>
 
         <div class="admin-price-input">
 
-          <input type="number" id="adminPriceInput" value="10000">
+          <input
 
-          <span>دینار</span>
+            type="number"
+
+            id="adminPriceInput"
+
+            value="10000"
+
+            min="1"
+
+          >
+
+          <span>
+
+            دینار
+
+          </span>
 
         </div>
 
-        <button class="main-btn" id="savePriceBtn">
+        <button
+
+          class="main-btn"
+
+          id="savePriceBtn"
+
+        >
 
           پاشەکەوتکردنی نرخ
 
@@ -750,57 +1060,113 @@
 
         <div class="admin-card-title">
 
-          <h3>مامەڵە نوێیەکان</h3>
+          <h3>
 
-          <span>ئەمڕۆ</span>
+            مامەڵە نوێیەکان
 
-        </div>
+          </h3>
 
-        <div class="admin-row">
+          <span>
 
-          <span class="admin-avatar">U</span>
+            ئەمڕۆ
 
-          <div>
-
-            <strong>User_245</strong>
-
-            <small>کڕینی 100,000 دینار</small>
-
-          </div>
-
-          <b>+$100</b>
+          </span>
 
         </div>
 
         <div class="admin-row">
 
-          <span class="admin-avatar">S</span>
+          <span class="admin-avatar">
+
+            U
+
+          </span>
 
           <div>
 
-            <strong>User_312</strong>
+            <strong>
 
-            <small>کڕینی 50,000 دینار</small>
+              User_245
+
+            </strong>
+
+            <small>
+
+              کڕینی 100,000 دینار
+
+            </small>
 
           </div>
 
-          <b>+$50</b>
+          <b>
+
+            +$100
+
+          </b>
 
         </div>
 
         <div class="admin-row">
 
-          <span class="admin-avatar">A</span>
+          <span class="admin-avatar">
+
+            S
+
+          </span>
 
           <div>
 
-            <strong>User_108</strong>
+            <strong>
 
-            <small>کڕینی 200,000 دینار</small>
+              User_312
+
+            </strong>
+
+            <small>
+
+              کڕینی 50,000 دینار
+
+            </small>
 
           </div>
 
-          <b>+$200</b>
+          <b>
+
+            +$50
+
+          </b>
+
+        </div>
+
+        <div class="admin-row">
+
+          <span class="admin-avatar">
+
+            A
+
+          </span>
+
+          <div>
+
+            <strong>
+
+              User_108
+
+            </strong>
+
+            <small>
+
+              کڕینی 200,000 دینار
+
+            </small>
+
+          </div>
+
+          <b>
+
+            +$200
+
+          </b>
 
         </div>
 
@@ -808,11 +1174,17 @@
 
     </section>
 
-    <!-- BOTTOM NAV -->
+    <!-- ================= BOTTOM NAV ================= -->
 
     <nav class="bottom-nav">
 
-      <button class="nav-item active" data-page="homePage">
+      <button
+
+        class="nav-item active"
+
+        data-page="homePage"
+
+      >
 
         <span>⌂</span>
 
@@ -820,7 +1192,13 @@
 
       </button>
 
-      <button class="nav-item" data-page="walletPage">
+      <button
+
+        class="nav-item"
+
+        data-page="walletPage"
+
+      >
 
         <span>👛</span>
 
@@ -828,7 +1206,13 @@
 
       </button>
 
-      <button class="nav-item buy-nav" data-page="buyPage">
+      <button
+
+        class="nav-item buy-nav"
+
+        data-page="buyPage"
+
+      >
 
         <span>＋</span>
 
@@ -836,7 +1220,13 @@
 
       </button>
 
-      <button class="nav-item" data-page="historyPage">
+      <button
+
+        class="nav-item"
+
+        data-page="historyPage"
+
+      >
 
         <span>◷</span>
 
@@ -844,7 +1234,13 @@
 
       </button>
 
-      <button class="nav-item" data-page="profilePage">
+      <button
+
+        class="nav-item"
+
+        data-page="profilePage"
+
+      >
 
         <span>♙</span>
 
@@ -854,19 +1250,29 @@
 
     </nav>
 
-  </main>
+  </div>
 
-  <!-- SIDE MENU -->
+  <!-- ================= SIDE MENU ================= -->
 
   <div class="side-menu" id="sideMenu">
 
-    <div class="side-overlay" id="sideOverlay"></div>
+    <div
+
+      class="side-overlay"
+
+      id="sideOverlay"
+
+    ></div>
 
     <aside class="drawer">
 
       <div class="drawer-head">
 
-        <div class="brand-coin">D</div>
+        <div class="brand-coin">
+
+          D
+
+        </div>
 
         <div>
 
@@ -876,43 +1282,47 @@
 
         </div>
 
-        <button id="closeMenu">×</button>
+        <button id="closeMenu">
+
+          ×
+
+        </button>
 
       </div>
 
       <div class="drawer-links">
 
-        <button onclick="closeMenu(); openPage('homePage')">
+        <button onclick="closeMenu();openPage('homePage')">
 
           🏠 سەرەتا
 
         </button>
 
-        <button onclick="closeMenu(); openPage('buyPage')">
+        <button onclick="closeMenu();openPage('buyPage')">
 
           🪙 کڕینی دینار
 
         </button>
 
-        <button onclick="closeMenu(); openPage('walletPage')">
+        <button onclick="closeMenu();openPage('walletPage')">
 
           👛 Wallet
 
         </button>
 
-        <button onclick="closeMenu(); openPage('marketPage')">
+        <button onclick="closeMenu();openPage('marketPage')">
 
           📈 نرخ و گراف
 
         </button>
 
-        <button onclick="closeMenu(); openPage('historyPage')">
+        <button onclick="closeMenu();openPage('historyPage')">
 
           📜 مامەڵەکان
 
         </button>
 
-        <button onclick="closeMenu(); openPage('profilePage')">
+        <button onclick="closeMenu();openPage('profilePage')">
 
           👤 پڕۆفایل
 
@@ -920,7 +1330,7 @@
 
         <hr>
 
-        <button onclick="closeMenu(); openPage('adminPage')">
+        <button onclick="closeMenu();openPage('adminPage')">
 
           ⚙️ Admin Panel
 
